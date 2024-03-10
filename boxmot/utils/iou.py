@@ -201,12 +201,13 @@ def run_asso_func(func, *args):
         raise ValueError("Invalid function specified. Must be either '(g,d,c, )iou_batch' or 'centroid_batch'.")
 
     if func is (iou_batch or giou_batch or diou_batch or ciou_batch):
-        if len(args) != 4 or not all(isinstance(arg, (list, np.ndarray)) for arg in args[0:2]):
+        if len(args) != 4 or not all(isinstance(arg, (list, np.ndarray)) for arg in args[0:2]) or not all(isinstance(arg, (int)) for arg in args[2:]):
             raise ValueError("Invalid arguments for iou_batch. Expected two bounding boxes.")
-        return func(*args)
+        return func(args)
     elif func is centroid_batch:
         if len(args) != 4 or not all(isinstance(arg, (list, np.ndarray)) for arg in args[:2]) or not all(isinstance(arg, (int)) for arg in args[2:]):
             raise ValueError("Invalid arguments for centroid_batch. Expected two bounding boxes and two size parameters.")
+        return func(args)
         return func(*args)
     else:
         raise ValueError("No such association method")
