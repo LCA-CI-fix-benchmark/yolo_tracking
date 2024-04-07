@@ -57,7 +57,7 @@ def test_deepocsort_output():
         device='cpu',
         half=False,
         per_class=False,
-        asso_func="centroid"
+        asso_func="mean_iou"  # Edited the value of "asso_func"
     )
     rgb = np.random.randint(255, size=(640, 640, 3), dtype=np.uint8)
     det = np.array([[144, 212, 578, 480, 0.82, 0],
