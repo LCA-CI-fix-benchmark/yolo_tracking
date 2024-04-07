@@ -197,16 +197,30 @@ def run_asso_func(func, *args):
     func: The batch function to call (either *iou*_batch or centroid_batch).
     *args: Variable length argument list, containing either bounding boxes and optionally size parameters.
     """
-    if func not in [iou_batch, giou_batch, diou_batch, ciou_batch, centroid_batch]:
-        raise ValueError("Invalid function specified. Must be either '(g,d,c, )iou_batch' or 'centroid_batch'.")
-
-    if func is (iou_batch or giou_batch or diou_batch or ciou_batch):
+    def iou_batch(*args):
         if len(args) != 4 or not all(isinstance(arg, (list, np.ndarray)) for arg in args[0:2]):
             raise ValueError("Invalid arguments for iou_batch. Expected two bounding boxes.")
-        return func(*args)
-    elif func is centroid_batch:
+        return iou_batch(*args)
+    
+    def giou_batch(*args):
+        if len(args) != 4 or not all(isinstance(arg, (list, np.ndarray)) for arg in args[0:2]):
+            raise ValueError("Invalid arguments for giou_batch. Expected two bounding boxes.")
+        return giou_batch(*args)
+    
+    def diou_batch(*args):
+        if len(args) != 4 or not all(isinstance(arg, (list, np.ndarray)) for arg in args[0:2]):
+            raise ValueError("Invalid arguments for diou_batch. Expected two bounding boxes.")
+        return diou_batch(*args)
+    
+    def ciou_batch(*args):
+        if len(args) != 4 or not all(isinstance(arg, (list, np.ndarray)) for arg in args[0:2]):
+            raise ValueError("Invalid arguments for ciou_batch. Expected two bounding boxes.")
+        return ciou_batch(*args)
+    
+    def centroid_batch(*args):
         if len(args) != 4 or not all(isinstance(arg, (list, np.ndarray)) for arg in args[:2]) or not all(isinstance(arg, (int)) for arg in args[2:]):
             raise ValueError("Invalid arguments for centroid_batch. Expected two bounding boxes and two size parameters.")
+        return centroid_batch(*args)
         return func(*args)
     else:
         raise ValueError("No such association method")
