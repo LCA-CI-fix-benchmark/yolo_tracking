@@ -202,7 +202,7 @@ def run_asso_func(func, *args):
 
     if func is (iou_batch or giou_batch or diou_batch or ciou_batch):
         if len(args) != 4 or not all(isinstance(arg, (list, np.ndarray)) for arg in args[0:2]):
-            raise ValueError("Invalid arguments for iou_batch. Expected two bounding boxes.")
+                raise ValueError("Invalid arguments for iou_batch. Expected two bounding boxes.")
         return func(*args)
     elif func is centroid_batch:
         if len(args) != 4 or not all(isinstance(arg, (list, np.ndarray)) for arg in args[:2]) or not all(isinstance(arg, (int)) for arg in args[2:]):
