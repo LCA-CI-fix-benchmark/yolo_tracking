@@ -5,9 +5,18 @@ import numpy as np
 
 def iou_batch(bboxes1, bboxes2) -> np.ndarray:
     """
-    From SORT: Computes IOU between two bboxes in the form [x1,y1,x2,y2]
-    """
-    bboxes2 = np.expand_dims(bboxes2, 0)
+    From SORT: Computes IOU between two bboxes in the form [x1,y1,x2,y2        raise ValueError("Invalid function specified. Must be either '(g,d,c, )iou_batch' or 'centroid_batch'.")
+
+    if func in (iou_batch, giou_batch, diou_batch, ciou_batch):
+        if len(args) != 4 or not all(isinstance(arg, (list, np.ndarray)) for arg in args[0:2]):
+            raise ValueError("Invalid arguments for iou_batch. Expected two bounding boxes.")
+        return func(*args)
+    elif func is centroid_batch:
+        if len(args) != 4 or not all(isinstance(arg, (list, np.ndarray)) for arg in args[:2]) or not all(isinstance(arg, int) for arg in args[2:]):
+            raise ValueError("Invalid arguments for centroid_batch. Expected two bounding boxes and two size parameters.")
+        return func(*args)
+    else:
+        raise ValueError("No such association method")  bboxes2 = np.expand_dims(bboxes2, 0)
     bboxes1 = np.expand_dims(bboxes1, 1)
 
     xx1 = np.maximum(bboxes1[..., 0], bboxes2[..., 0])

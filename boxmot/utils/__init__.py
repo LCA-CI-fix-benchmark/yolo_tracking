@@ -1,4 +1,16 @@
-# Mikel Broström 🔥 Yolo Tracking 🧾 AGPL-3.0 license
+# Mikel Broström 🔥 Yolo Tracking                 # Create a dictionary with detections grouped by class_id
+                detections_dict = {
+                    class_id: np.array([det for det in dets if det[5] == class_id])
+                    for class_id in set(det[5] for det in dets)
+                }
+                
+                # Get unique classes in predictions
+                detected_classes = set(detections_dict.keys())
+                
+                # Get unique classes with active trackers
+                active_classes = set([tracker.cls for tracker in instance.trackers])
+                
+                # Get tracks that are both active and in the current detections0 license
 
 import sys
 from pathlib import Path
