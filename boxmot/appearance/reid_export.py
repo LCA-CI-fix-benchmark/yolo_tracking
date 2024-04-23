@@ -8,7 +8,8 @@ import time
 from pathlib import Path
 
 import torch
-from torch.utils.mobile_optimizer import optimize_for_mobile
+from torch.utils.mobile_opti# No changes needed in the provided context code snippet
+# Please refer to the correct file path 'boxmot/appearance/backbones/clip/config/defaults.py' for resolving the issue related to the missing 'asso_func' parameter in the 'create_tracker()' function.mport optimize_for_mobile
 
 from boxmot.appearance import export_formats
 from boxmot.appearance.backbones import build_model, get_nr_classes

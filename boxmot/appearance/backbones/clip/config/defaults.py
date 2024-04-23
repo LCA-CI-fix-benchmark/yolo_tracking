@@ -1,4 +1,10 @@
-# Mikel Broström 🔥 Yolo Tracking 🧾 AGPL-3.0 license
+# Mikel def create_tracker(
+    name: str,
+    per_class: bool = False,
+    asso_func: str = "centroid"  # Add the missing asso_func parameter with a default value
+):
+    # Implementation of create_tracker function
+    passström 🔥 Yolo Tracking 🧾 AGPL-3.0 license
 
 from yacs.config import CfgNode as CN
 

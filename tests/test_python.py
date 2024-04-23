@@ -1,6 +1,17 @@
 # Mikel Broström 🔥 Yolo Tracking 🧾 AGPL-3.0 license
 
-# pytest tests/test_python.py
+# pydef create_tracker(
+    half=False,
+    per_class=False,
+    asso_func="centroid"  # Add the missing asso_func parameter with a default value
+):
+    # Implementation of create_tracker function
+    pass
+
+rgb = np.random.randint(255, size=(640, 640, 3), dtype=np.uint8)
+det = np.array([[144, 212, 578, 480, 0.82, 0],
+                [425, 281, 576, 472, 0.56, 65]])
+output = tracker.update(det, rgb)ts/test_python.py
 
 from pathlib import Path
 

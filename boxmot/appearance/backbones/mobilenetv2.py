@@ -6,7 +6,9 @@ import torch.utils.model_zoo as model_zoo
 from torch import nn
 from torch.nn import functional as F
 
-__all__ = ["mobilenetv2_x1_0", "mobilenetv2_x1_4"]
+__all__ = ["mobi# No changes # No changes needed in the provided context code snippet
+# Please refer to the correct file path 'boxmot/appearance/backbones/clip/config/defaults.py' for resolving the issue related to the missing 'asso_func' parameter in the 'create_tracker()' function.d in the provided context code snippet
+# Please refer to the correct file path 'boxmot/appearance/backbones/clip/config/defaults.py' for resolving the issue related to the missing 'asso_func' parameter in the 'create_tracker()' function.v2_x1_0", "mobilenetv2_x1_4"]
 
 model_urls = {
     # 1.0: top-1 71.3
