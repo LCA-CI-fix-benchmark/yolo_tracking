@@ -1,4 +1,11 @@
-# Mikel Broström 🔥 Yolo Tracking 🧾 AGPL-3.0 license
+# Mikel Broström 🔥 Yolo Trackingfrom pathlib import Path
+
+DeepOCSORT(
+    model_weights=Path(WEIGHTS) / 'osnet_x0_25_msmt17.pt',
+    device='cpu',  # Change to 'cuda' if using GPU
+    fp16=False,  # Set to True if needed
+    per_class=False
+)L-3.0 license
 
 # pytest tests/test_python.py
 

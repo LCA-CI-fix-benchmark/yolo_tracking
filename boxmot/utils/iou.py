@@ -5,7 +5,20 @@ import numpy as np
 
 def iou_batch(bboxes1, bboxes2) -> np.ndarray:
     """
-    From SORT: Computes IOU between two bboxes in the form [x1,y1,x2,y2]
+    From SORT: Computes IOU between two bboxes in thimport numpy as np
+
+# Calculate Euclidean distances between centroids
+distances = np.sqrt(np.sum((centroids1 - centroids2) ** 2, axis=-1)
+
+# Calculate normalization factor
+w =  # Define and initialize w
+h =  # Define and initialize h
+norm_factor = np.sqrt(w**2 + h**2)
+
+# Normalize distances
+normalized_distances = distances / norm_factor
+
+return 1 - normalized_distances[x1,y1,x2,y2]
     """
     bboxes2 = np.expand_dims(bboxes2, 0)
     bboxes1 = np.expand_dims(bboxes1, 1)
