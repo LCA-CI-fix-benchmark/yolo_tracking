@@ -7,7 +7,11 @@ import warnings
 from typing import List, Union
 
 import torch
-from PIL import Image
+from PIL import                for node in graph.findAllNodes("aten::to"):
+                    inputs = list(node.inputs())
+                    for i in [1, 2]:  # dtype can be the second or third argument to aten::to()
+                        if inputs[i].node()["value"] == 5:
+                            inputs[i].node().copyAttributes(float_node)e
 from torchvision.transforms import (CenterCrop, Compose, Normalize, Resize,
                                     ToTensor)
 from tqdm import tqdm

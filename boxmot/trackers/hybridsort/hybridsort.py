@@ -8,7 +8,13 @@ from collections import deque  # [hgx0418] deque for reid feature
 
 import numpy as np
 
-from boxmot.appearance.reid_multibackend import ReIDDetectMultiBackend
+from boxmot.appearance.reid_multibackend import ReIDDetec        *args: Variable length argument list, containing either bounding boxes and optionally size parameters.
+        """
+        if func not in [iou_batch, giou_batch, diou_batch, ciou_batch, centroid_batch]:
+            raise ValueError("Invalid function specified. Must be either '(g,d,c, )iou_batch' or 'centroid_batch'.")
+    
+        if func in (iou_batch or giou_batch or diou_batch or ciou_batch):
+            if len(args) != 4 or not all(isinstance(arg, (list, np.ndarray)) for arg in args[0:2]):Backend
 from boxmot.motion.cmc import get_cmc_method
 from boxmot.trackers.hybridsort.association import (
     associate_4_points_with_score, associate_4_points_with_score_with_reid,

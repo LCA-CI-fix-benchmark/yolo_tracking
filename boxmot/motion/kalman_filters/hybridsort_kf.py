@@ -17,7 +17,10 @@ prediction is called the *prior*, which you can think of colloquially
 as the estimate prior to incorporating the measurement.
 The update step, implemented with the method or function `update()`,
 incorporates the measurement z with covariance R, into the state
-estimate (x, P). The class stores the system uncertainty in S,
+estimate (x, P). The class sto        can be of different shapes. Then, if Hx is a single value, it can
+        be either a 1D array or 2D vector. If either is true, z can reasonably
+        be a scalar (either '3' or np.array('3') are scalars under this
+        definition), a 1D, 1 element array, or a 2D, 1 element array. You arethe system uncertainty in S,
 the innovation (residual between prediction and measurement in
 measurement space) in y, and the Kalman gain in k. The procedural
 form returns these variables to you. In Bayesian terms this computes

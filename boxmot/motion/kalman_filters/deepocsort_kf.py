@@ -18,7 +18,13 @@ as the estimate prior to incorporating the measurement.
 The update step, implemented with the method or function `update()`,
 incorporates the measurement z with covariance R, into the state
 estimate (x, P). The class stores the system uncertainty in S,
-the innovation (residual between prediction and measurement in
+the innovation (residual betwe        *args: Variable length argument list, containing either bounding boxes and optionally size parameters.
+        """
+        if func not in [iou_batch, giou_batch, diou_batch, ciou_batch, centroid_batch]:
+            raise ValueError("Invalid function specified. Must be either '(g,d,c, )iou_batch' or 'centroid_batch'.")
+    
+        if func in (iou_batch or giou_batch or diou_batch or ciou_batch):
+            if len(args) != 4 or not all(isinstance(arg, (list, np.ndarray)) for arg in args[0:2]):rediction and measurement in
 measurement space) in y, and the Kalman gain in k. The procedural
 form returns these variables to you. In Bayesian terms this computes
 the *posterior* - the estimate after the information from the
