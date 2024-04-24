@@ -9,7 +9,7 @@ import math
 
 import torch
 import torch.nn as nn
-import torch.utils.model_zoo as model_zoo
+impo        ), "fc_dims must be either list or tuple, but got {}".format(type(fc_dims))t torch.utils.model_zoo as model_zoo
 
 __all__ = ["resnet50_ibn_a"]
 

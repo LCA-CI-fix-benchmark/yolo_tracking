@@ -52,7 +52,46 @@
 16,-1,1319.5,453.5,78,209.5,1
 16,-1,1291,535.1,53.2,132.9,1
 16,-1,1,244.9,224.7,691.3,0.932
-273,-1,1713.2,526.4,107.9,198.1,1
+273,-1,1713.2,526.4,1# Assuming # Assuming the# Assuming the fi# Assuming the fields represent# Assuming the# Assuming the fields represent: [frame_number, object_id, x_center, y_center, width, height, confidence]
+# Adding headers for better clarity
+
+Frame, Object ID, X Center, Y Center, Width, Height, Confidence
+219, -1, 1685.9, 400.4, 115.5, 249.7, 1
+219, -1, 121.9, 253.5, 353, 761.8, 0.996
+219, -1, 494.9, 288.9, 200.6, 580.9, 0.985
+360, -1, 1102.6, 368.2, 161.8, 394.9, 1lds represent: [frame_number, object_id, x_center, y_center, width, height, confidence]
+# Adding headers for better clarity
+
+Frame, Object ID, X Center, Y Center, Width, Height, Confidence
+352, -1, 1124.2, 388.4, 151.9, 360.2, 1
+352, -1, 1468.4, 392.9, 148, 326.1, 1
+352, -1, 1678, 525.4, 90.5, 205, 1frame_number, object_id, x_center, y_center, width, height, confidence]
+# Adding headers for better clarity
+
+Frame, Object ID, X Center, Y Center, Width, Height, Confidence
+494, -1, 1254.5, 451.7, 83.3, 199.3, 1
+494, -1, 532.1, 327.7, 187.6, 519.5, 1ds represent: [frame_number, object_id, x_center, y_center, width, height, confidence]
+# Adding a header for better clarity
+
+Frame, Object ID, X Center, Y Center, Width, Height, Confidence
+383, -1, 1023.3, 338.8, 184.3, 466.8, 1
+383, -1, 1611.2, 407.7, 129.8, 291.9, 1
+383, -1, 336.7, 285.5, 210.3, 633.9, 1
+383, -1, 1493, 409.2, 124.6, 284.1, 1lds represent: [frame_number, object_id, x_center, y_center, width, height, confidence]
+# Adding a header for better clarity and labeling the confidence field
+
+Frame, Object ID, X Center, Y Center, Width, Height, Confidence
+463, -1, 1268.5, 387, 120.9, 339.7, 1
+463, -1, 1450.9, 451.8, 64.9, 195.8, 1
+463, -1, 1, 154, 326.8, 927, 1
+463, -1, 1655.6, 406.4, 153.3, 277.5, 1
+463, -1, 214, 284, 244.4, 620.2, 0.541ields represent: [frame_number, object_id, x_center, y_center, width, height, confidence]
+# Adding headers for better clarity
+
+Frame, Object ID, X Center, Y Center, Width, Height, Confidence
+432, -1, 1329.2, 450.8, 65.8, 199.2, 1
+432, -1, 1701, 423.9, 95, 237.6, 1
+10, -1, 1677.7, 384.6, 167.1, 366, 19,198.1,1
 273,-1,1075.5,334.3,209.9,504.4,1
 273,-1,1435.2,371.4,110.3,342.9,1
 273,-1,934.1,348.3,171.1,471,1
