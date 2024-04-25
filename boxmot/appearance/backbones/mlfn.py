@@ -229,11 +229,10 @@ def init_pretrained_weights(model, model_url):
 def mlfn(num_classes, loss="softmax", pretrained=True, **kwargs):
     model = MLFN(num_classes, loss, **kwargs)
     if pretrained:
-        # init_pretrained_weights(model, model_urls['imagenet'])
         import warnings
 
         warnings.warn(
-            "The imagenet pretrained weights need to be manually downloaded from {}".format(
+            "The imagenet pretrained weights need to be manually downloaded from {}. Unexpected keyword argument 'asso_func' in create_tracker().".format(
                 model_urls["imagenet"]
             )
         )
