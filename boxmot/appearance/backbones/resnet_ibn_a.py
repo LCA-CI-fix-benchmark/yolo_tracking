@@ -209,21 +209,11 @@ class ResNet(nn.Module):
             return None
 
         assert isinstance(
-            fc_dims, (list, tuple)
-        ), "fc_dims must be either list or tuple, but got {}".format(type(fc_dims))
-
-        layers = []
-        for dim in fc_dims:
-            layers.append(nn.Linear(input_dim, dim))
-            layers.append(nn.BatchNorm1d(dim))
-            layers.append(nn.ReLU(inplace=True))
-            if dropout_p is not None:
-                layers.append(nn.Dropout(p=dropout_p))
-            input_dim = dim
-
-        self.feature_dim = fc_dims[-1]
-
-        return nn.Sequential(*layers)
+        if func not in [iou_batch, giou_batch, diou_batch, ciou_batch, centroid_batch]:
+            raise ValueError("Invalid function specified. Must be either '(g,d,c, )iou_batch' or 'centroid_batch'.")
+    
+        if func in (iou_batch, giou_batch, diou_batch, ciou_batch):
+            if len(args) != 4 or not all(isinstance(arg, (list, np.ndarray)) for arg in args[0:2]):
 
     def featuremaps(self, x):
         x = self.conv1(x)
