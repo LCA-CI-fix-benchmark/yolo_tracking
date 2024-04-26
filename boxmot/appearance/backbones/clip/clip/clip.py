@@ -78,6 +78,9 @@ def _transform(n_px):
 
 
 def available_models() -> List[str]:
+import torch
+from typing import Union
+
     """Returns the names of available CLIP models"""
     return list(_MODELS.keys())
 

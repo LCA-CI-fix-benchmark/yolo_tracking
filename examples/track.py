@@ -7,8 +7,8 @@ from pathlib import Path
 import torch
 
 from boxmot import TRACKERS
-from boxmot.tracker_zoo import create_tracker
-from boxmot.utils import ROOT, WEIGHTS
+from .tracker_zoo import create_tracker
+from .utils import ROOT, WEIGHTS
 from boxmot.utils.checks import TestRequirements
 from examples.detectors import get_yolo_inferer
 
