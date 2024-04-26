@@ -773,12 +773,10 @@ class KalmanFilter(object):
             # this example demonstrates tracking a measurement where the time
             # between measurement varies, as stored in dts. This requires
             # that F be recomputed for each epoch. The output is then smoothed
-            # with an RTS smoother.
-            zs = [t + random.randn()*4 for t in range (40)]
-            Fs = [np.array([[1., dt], [0, 1]] for dt in dts]
+            zs = [t + random.randn()*4 for t in range(40)]
+            Fs = [np.array([[1., dt], [0, 1]]) for dt in dts]
             (mu, cov, _, _) = kf.batch_filter(zs, Fs=Fs)
             (xs, Ps, Ks, Pps) = kf.rts_smoother(mu, cov, Fs=Fs)
-        """
 
         #pylint: disable=too-many-statements
         n = np.size(zs, 0)

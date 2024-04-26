@@ -78,9 +78,19 @@ def _transform(n_px):
 
 
 def available_models() -> List[str]:
+import os
+import warnings
+from typing import Union
+import torch
+from torchvision.transforms.functional import _transform
+from PIL import Image as PILImage
+
+_MODELS = {}
+# Define _download function if not already defined
+
+def _available_models():
     """Returns the names of available CLIP models"""
     return list(_MODELS.keys())
-
 
 def load(name: str, device: Union[str, torch.device] = "cuda" if torch.cuda.is_available() else "cpu", jit=False):
     """Load a CLIP model
@@ -88,7 +98,7 @@ def load(name: str, device: Union[str, torch.device] = "cuda" if torch.cuda.is_a
     Parameters
     ----------
     name : str
-        A model name listed by `clip.available_models()`, or the path to a model checkpoint containing the state_dict
+        A model name listed by `clip._available_models()`, or the path to a model checkpoint containing the state_dict
 
     device : Union[str, torch.device]
         The device to put the loaded model
@@ -109,7 +119,7 @@ def load(name: str, device: Union[str, torch.device] = "cuda" if torch.cuda.is_a
     elif os.path.isfile(name):
         model_path = name
     else:
-        raise RuntimeError(f"Model {name} not found; available models = {available_models()}")
+        raise RuntimeError(f"Model {name} not found; available models = {_available_models()}")
 
     try:
         # loading JIT archive
@@ -157,29 +167,10 @@ def load(name: str, device: Union[str, torch.device] = "cuda" if torch.cuda.is_a
         float_node = float_input.node()
 
         def patch_float(module):
-            try:
-                graphs = [module.graph] if hasattr(module, "graph") else []
-            except RuntimeError:
-                graphs = []
+import torch
+from typing import Union, List
 
-            if hasattr(module, "forward1"):
-                graphs.append(module.forward1.graph)
-
-            for graph in graphs:
-                for node in graph.findAllNodes("aten::to"):
-                    inputs = list(node.inputs())
-                    for i in [1, 2]:  # dtype can be the second or third argument to aten::to()
-                        if inputs[i].node()["value"] == 5:
-                            inputs[i].node().copyAttributes(float_node)
-
-        model.apply(patch_float)
-        patch_float(model.encode_image)
-        patch_float(model.encode_text)
-
-        model.float()
-
-    return model, _transform(model.input_resolution.item())
-
+# Define _tokenizer if not already defined
 
 def tokenize(texts: Union[str, List[str]], context_length: int = 77, truncate: bool = False) -> torch.LongTensor:
     """
@@ -206,17 +197,14 @@ def tokenize(texts: Union[str, List[str]], context_length: int = 77, truncate: b
         texts = [texts]  # ['a photo of a face.']
 
     sot_token = _tokenizer.encoder["<|startoftext|>"]  # 49406
+    eot_token = _tokenizer.encoder["
+
+    sot_token = _tokenizer.encoder["<|startoftext|>"]  # 49406
     eot_token = _tokenizer.encoder["<|endoftext|>"]  # 49407
     all_tokens = [[sot_token] + _tokenizer.encode(text) + [eot_token] for text in texts]
     result = torch.zeros(len(all_tokens), context_length, dtype=torch.long)  # 1,77
 
     for i, tokens in enumerate(all_tokens):
-        if len(tokens) > context_length:  # context_length 77
             if truncate:
                 tokens = tokens[:context_length]
-                tokens[-1] = eot_token
-            else:
-                raise RuntimeError(f"Input {texts[i]} is too long for context length {context_length}")
-        result[i, :len(tokens)] = torch.tensor(tokens)
-
     return result

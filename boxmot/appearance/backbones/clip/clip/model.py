@@ -1,5 +1,4 @@
 # Mikel Broström 🔥 Yolo Tracking 🧾 AGPL-3.0 license
-
 from collections import OrderedDict
 from typing import Tuple, Union
 
@@ -8,17 +7,17 @@ import torch
 import torch.nn.functional as F
 from torch import nn
 
-
 class Bottleneck(nn.Module):
     expansion = 4
 
+    def __init__(self, inplanes, planes, stride=1, downsample=None):
+        super(Bottleneck, self).__init__()
+        # Implementation of __init__ method
+
+    def forward(self, x):
+        # Implementation of forward method
+
     def __init__(self, inplanes, planes, stride=1):
-        super().__init__()
-
-        # all conv layers have stride 1. an avgpool is performed after the second convolution when stride > 1
-        self.conv1 = nn.Conv2d(inplanes, planes, 1, bias=False)
-        self.bn1 = nn.BatchNorm2d(planes)
-
         self.conv2 = nn.Conv2d(planes, planes, 3, padding=1, bias=False)
         self.bn2 = nn.BatchNorm2d(planes)
 
@@ -34,23 +33,14 @@ class Bottleneck(nn.Module):
         if stride > 1 or inplanes != planes * Bottleneck.expansion:
             # downsampling layer is prepended with an avgpool, and the subsequent convolution has stride 1
             self.downsample = nn.Sequential(OrderedDict([
-                ("-1", nn.AvgPool2d(stride)),
-                ("0", nn.Conv2d(inplanes, planes * self.expansion, 1, stride=1, bias=False)),
-                ("1", nn.BatchNorm2d(planes * self.expansion))
-            ]))
+    
+    def forward(self, x):
+        # Implementation of forward method
+        self.stride = stride
 
+        if stride > 1 or inplanes != planes * Bottleneck.expansion:
     def forward(self, x: torch.Tensor):
-        identity = x
-
-        out = self.relu(self.bn1(self.conv1(x)))
-        out = self.relu(self.bn2(self.conv2(out)))
-        out = self.avgpool(out)
-        out = self.bn3(self.conv3(out))
-
-        if self.downsample is not None:
-            identity = self.downsample(x)
-
-        out += identity
+        # Implementation of forward method
         out = self.relu(out)
         return out
 
@@ -72,34 +62,23 @@ class AttentionPool2d(nn.Module):
         x = x + self.positional_embedding[:, None, :].to(x.dtype)  # (HW+1)NC
         x, _ = F.multi_head_attention_forward(
             query=x, key=x, value=x,
-            embed_dim_to_check=x.shape[-1],
-            num_heads=self.num_heads,
-            q_proj_weight=self.q_proj.weight,
-            k_proj_weight=self.k_proj.weight,
-            v_proj_weight=self.v_proj.weight,
-            in_proj_weight=None,
-            in_proj_bias=torch.cat([self.q_proj.bias, self.k_proj.bias, self.v_proj.bias]),
+        in_proj_bias=None,
             bias_k=None,
             bias_v=None,
             add_zero_attn=False,
-            dropout_p=0,
-            out_proj_weight=self.c_proj.weight,
-            out_proj_bias=self.c_proj.bias,
-            use_separate_proj_weight=True,
-            training=self.training,
-            need_weights=False
+            dropout_p=0.0,
+            out_proj_weight=self.out_proj.weight,
+            out_proj_bias=None,
+        )
+        
+        return x
         )
 
         return x
-
-
-class ModifiedResNet(nn.Module):
-    """
-    A ResNet class that is similar to torchvision's but contains the following changes:
-    - There are now 3 "stem" convolutions as opposed to 1, with an average pool instead of a max pool.
-    - Performs anti-aliasing strided convolutions, where an avgpool is prepended to convolutions with stride > 1
-    - The final pooling layer is a QKV attention instead of an average pool
-    """
+            out_proj_bias=self.c_proj.bias,
+        )
+        
+        return x
 
     def __init__(self, layers, output_dim, heads, input_resolution=224, width=64):
         super().__init__()

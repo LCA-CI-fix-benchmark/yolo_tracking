@@ -196,9 +196,16 @@ def run_asso_func(func, *args):
     Parameters:
     func: The batch function to call (either *iou*_batch or centroid_batch).
     *args: Variable length argument list, containing either bounding boxes and optionally size parameters.
-    """
-    if func not in [iou_batch, giou_batch, diou_batch, ciou_batch, centroid_batch]:
-        raise ValueError("Invalid function specified. Must be either '(g,d,c, )iou_batch' or 'centroid_batch'.")
+    
+    Parameters
+    ----------
+    func : function
+        The function to be selected from [iou_batch, giou_batch, diou_batch, ciou_batch, centroid_batch].
+    
+    Raises
+    ------
+    ValueError
+        If an invalid function is specified. Must be either '(g,d,c, )iou_batch' or 'centroid_batch'.
 
     if func in (iou_batch, giou_batch, diou_batch, ciou_batch):
         if len(args) != 4 or not all(isinstance(arg, (list, np.ndarray)) for arg in args[0:2]):

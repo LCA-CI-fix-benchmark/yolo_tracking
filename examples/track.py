@@ -1,19 +1,8 @@
 # Mikel Broström 🔥 Yolo Tracking 🧾 AGPL-3.0 license
-
-import argparse
-from functools import partial
-from pathlib import Path
-
-import torch
-
+from boxmot.utils.checks import TestRequirements
+from boxmot.utils import ROOT, WEIGHTS
 from boxmot import TRACKERS
 from boxmot.tracker_zoo import create_tracker
-from boxmot.utils import ROOT, WEIGHTS
-from boxmot.utils.checks import TestRequirements
-from examples.detectors import get_yolo_inferer
-
-__tr = TestRequirements()
-__tr.check_packages(('ultralytics @ git+https://github.com/mikel-brostrom/ultralytics.git', ))  # install
 
 from ultralytics import YOLO
 from ultralytics.data.utils import VID_FORMATS

@@ -313,6 +313,7 @@ class NearestNeighborDistanceMetric(object):
     """
     A nearest neighbor distance metric that, for each target, returns
     the closest distance to any sample that has been observed so far.
+    
     Parameters
     ----------
     metric : str
@@ -320,6 +321,7 @@ class NearestNeighborDistanceMetric(object):
     matching_threshold: float
         The matching threshold. Samples with larger distance are considered an
         invalid match.
+    """
     budget : Optional[int]
         If not None, fix samples per class to at most this number. Removes
         the oldest samples when the budget is reached.
