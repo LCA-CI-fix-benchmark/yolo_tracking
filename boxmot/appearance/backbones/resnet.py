@@ -293,19 +293,19 @@ class ResNet(nn.Module):
             return None
 
         assert isinstance(
-            fc_dims, (list, tuple)
-        ), "fc_dims must be either list or tuple, but got {}".format(type(fc_dims))
+        fc_dims, (list, tuple)
+    ), "fc_dims must be either list or tuple, but got {}".format(type(fc_dims))
 
-        layers = []
-        for dim in fc_dims:
-            layers.append(nn.Linear(input_dim, dim))
-            layers.append(nn.BatchNorm1d(dim))
-            layers.append(nn.ReLU(inplace=True))
-            if dropout_p is not None:
-                layers.append(nn.Dropout(p=dropout_p))
-            input_dim = dim
+    layers = []
+    for dim in fc_dims:
+        layers.append(nn.Linear(input_dim, dim))
+        layers.append(nn.BatchNorm1d(dim))
+        layers.append(nn.ReLU(inplace=True))
+        if dropout_p is not None:
+            layers.append(nn.Dropout(p=dropout_p))
+        input_dim = dim
 
-        self.feature_dim = fc_dims[-1]
+    self.feature_dim = fc_dims[-1]
 
         return nn.Sequential(*layers)
 

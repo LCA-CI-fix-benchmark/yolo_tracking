@@ -228,16 +228,16 @@ class OSBlock(nn.Module):
         )
         self.conv2d = nn.Sequential(
             LightConv3x3(mid_channels, mid_channels),
-            LightConv3x3(mid_channels, mid_channels),
-            LightConv3x3(mid_channels, mid_channels),
-            LightConv3x3(mid_channels, mid_channels),
-        )
-        self.gate = ChannelGate(mid_channels)
-        self.conv3 = Conv1x1Linear(mid_channels, out_channels)
-        self.downsample = None
-        if in_channels != out_channels:
-            self.downsample = Conv1x1Linear(in_channels, out_channels)
-        self.IN = None
+        LightConv3x3(mid_channels, mid_channels),
+        LightConv3x3(mid_channels, mid_channels),
+        LightConv3x3(mid_channels, mid_channels),
+    )
+    self.gate = ChannelGate(mid_channels)
+    self.conv3 = Conv1x1Linear(mid_channels, out_channels)
+    self.downsample = None
+    if in_channels != out_channels:
+        self.downsample = Conv1x1Linear(in_channels, out_channels)
+    self.IN = None
         if IN:
             self.IN = nn.InstanceNorm2d(out_channels, affine=True)
 

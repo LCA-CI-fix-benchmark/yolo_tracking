@@ -83,7 +83,8 @@ def available_models() -> List[str]:
 
 
 def load(name: str, device: Union[str, torch.device] = "cuda" if torch.cuda.is_available() else "cpu", jit=False):
-    """Load a CLIP model
+    """
+    Load a CLIP model
 
     Parameters
     ----------
@@ -100,6 +101,7 @@ def load(name: str, device: Union[str, torch.device] = "cuda" if torch.cuda.is_a
     -------
     model : torch.nn.Module
         The CLIP model
+    """
 
     preprocess : Callable[[PIL.Image], torch.Tensor]
         A torchvision transform that converts a PIL image into a tensor that the returned model can take as its input
@@ -163,14 +165,14 @@ def load(name: str, device: Union[str, torch.device] = "cuda" if torch.cuda.is_a
                 graphs = []
 
             if hasattr(module, "forward1"):
-                graphs.append(module.forward1.graph)
+    for graph in graphs:
+        for node in graph.findAllNodes("aten::to"):
+            inputs = list(node.inputs())
+            for i in [1, 2]:  # dtype can be the second or third argument to aten::to()
+                if inputs[i].node()["value"] == 5:
+                    inputs[i].node().copyAttributes(float_node)
 
-            for graph in graphs:
-                for node in graph.findAllNodes("aten::to"):
-                    inputs = list(node.inputs())
-                    for i in [1, 2]:  # dtype can be the second or third argument to aten::to()
-                        if inputs[i].node()["value"] == 5:
-                            inputs[i].node().copyAttributes(float_node)
+    model.apply(patch_float)
 
         model.apply(patch_float)
         patch_float(model.encode_image)
