@@ -78,18 +78,14 @@ def _transform(n_px):
 
 
 def available_models() -> List[str]:
-    """Returns the names of available CLIP models"""
-    return list(_MODELS.keys())
-
-
-def load(name: str, device: Union[str, torch.device] = "cuda" if torch.cuda.is_available() else "cpu", jit=False):
-    """Load a CLIP model
-
-    Parameters
-    ----------
-    name : str
-        A model name listed by `clip.available_models()`, or the path to a model checkpoint containing the state_dict
-
+def load(device=None):
+    if device is None:
+        device = "cuda" if torch.cuda.is_available() else "cpu"
+    
+    # Load CLIP model based on the provided device
+    model = CLIP(device=device)
+    
+    return model
     device : Union[str, torch.device]
         The device to put the loaded model
 

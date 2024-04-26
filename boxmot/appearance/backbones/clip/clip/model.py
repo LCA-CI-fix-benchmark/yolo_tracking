@@ -56,13 +56,27 @@ class Bottleneck(nn.Module):
 
 
 class AttentionPool2d(nn.Module):
-    def __init__(self, spacial_dim: int, embed_dim: int, num_heads: int, output_dim: int = None):
+class CLIP(nn.Module):
+    def __init__(self, 
+                 embed_dim, 
+                 image_resolution, 
+                 vision_layers, 
+                 vision_width, 
+                 vision_patch_size, 
+                 context_length, 
+                 vocab_size, 
+                 output_dim=None):
         super().__init__()
-        self.positional_embedding = nn.Parameter(torch.randn(spacial_dim + 1, embed_dim) / embed_dim ** 0.5)
-        self.k_proj = nn.Linear(embed_dim, embed_dim)
-        self.q_proj = nn.Linear(embed_dim, embed_dim)
-        self.v_proj = nn.Linear(embed_dim, embed_dim)
-        self.c_proj = nn.Linear(embed_dim, output_dim or embed_dim)
+
+        self.context_length = context_length
+        self.vocab_size = vocab_size
+        self.text_projection = nn.Linear(embed_dim, embed_dim)
+        self.positional_embedding = nn.Parameter(torch.randn(self.context_length, embed_dim))
+
+        if output_dim is None:
+            self.c_proj = nn.Linear(embed_dim, embed_dim)
+        else:
+            self.c_proj = nn.Linear(embed_dim, output_dim)
         self.num_heads = num_heads
 
     def forward(self, x):
