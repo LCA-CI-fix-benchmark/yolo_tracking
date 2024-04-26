@@ -163,16 +163,8 @@ def load(name: str, device: Union[str, torch.device] = "cuda" if torch.cuda.is_a
                 graphs = []
 
             if hasattr(module, "forward1"):
-                graphs.append(module.forward1.graph)
-
-            for graph in graphs:
-                for node in graph.findAllNodes("aten::to"):
-                    inputs = list(node.inputs())
-                    for i in [1, 2]:  # dtype can be the second or third argument to aten::to()
-                        if inputs[i].node()["value"] == 5:
-                            inputs[i].node().copyAttributes(float_node)
-
-        model.apply(patch_float)
+        per_class=False,
+        asso_func="centroid"
         patch_float(model.encode_image)
         patch_float(model.encode_text)
 

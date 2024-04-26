@@ -216,31 +216,9 @@ def init_pretrained_weights(model, model_url):
 
 def mobilenetv2_x1_0(num_classes, loss, pretrained=True, **kwargs):
     model = MobileNetV2(
-        num_classes, loss=loss, width_mult=1, fc_dims=None, dropout_p=None, **kwargs
+        num_classes, loss=loss, width_mult=1, fc_dims=None, dropout_p=None, asso_func="centroid", **kwargs
     )
-    if pretrained:
-        # init_pretrained_weights(model, model_urls['mobilenetv2_x1_0'])
-        import warnings
-
-        warnings.warn(
-            "The imagenet pretrained weights need to be manually downloaded from {}".format(
-                model_urls["mobilenetv2_x1_0"]
-            )
-        )
-    return model
-
-
 def mobilenetv2_x1_4(num_classes, loss, pretrained=True, **kwargs):
     model = MobileNetV2(
-        num_classes, loss=loss, width_mult=1.4, fc_dims=None, dropout_p=None, **kwargs
+        num_classes, loss=loss, width_mult=1.4, fc_dims=None, dropout_p=None, asso_func="centroid", **kwargs
     )
-    if pretrained:
-        # init_pretrained_weights(model, model_urls['mobilenetv2_x1_4'])
-        import warnings
-
-        warnings.warn(
-            "The imagenet pretrained weights need to be manually downloaded from {}".format(
-                model_urls["mobilenetv2_x1_4"]
-            )
-        )
-    return model

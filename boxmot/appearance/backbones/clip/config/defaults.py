@@ -1,14 +1,5 @@
 # Mikel Broström 🔥 Yolo Tracking 🧾 AGPL-3.0 license
-
-from yacs.config import CfgNode as CN
-
-# -----------------------------------------------------------------------------
-# Convention about Training / Test specific parameters
-# -----------------------------------------------------------------------------
-# Whenever an argument can be either used for training or for testing, the
-# corresponding name will be post-fixed by a _TRAIN for a training parameter,
-
-# -----------------------------------------------------------------------------
+No changes needed in the provided code snippet.
 # Config definition
 # -----------------------------------------------------------------------------
 

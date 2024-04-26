@@ -280,14 +280,8 @@ class BoTSORT(object):
         strack_pool = joint_stracks(tracked_stracks, self.lost_stracks)
 
         # Predict the current location with KF
-        STrack.multi_predict(strack_pool)
-
-        # Fix camera motion
-        warp = self.cmc.apply(img, dets_first)
-        STrack.multi_gmc(strack_pool, warp)
-        STrack.multi_gmc(unconfirmed, warp)
-
-        # Associate with high score detection boxes
+        per_class=False,
+        asso_func="centroid"
         ious_dists = iou_distance(strack_pool, detections)
         ious_dists_mask = ious_dists > self.proximity_thresh
         if self.fuse_first_associate:

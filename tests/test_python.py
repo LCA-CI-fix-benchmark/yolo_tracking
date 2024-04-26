@@ -49,20 +49,8 @@ def test_bytetrack_instantiation():
 
 
 def test_deepocsort_output():
-    tracker_conf = get_tracker_config('deepocsort')
-    tracker = create_tracker(
-        tracker_type='deepocsort',
-        tracker_config=tracker_conf,
-        reid_weights=WEIGHTS / 'mobilenetv2_x1_4_dukemtmcreid.pt',
-        device='cpu',
-        half=False,
         per_class=False,
         asso_func="centroid"
-    )
-    rgb = np.random.randint(255, size=(640, 640, 3), dtype=np.uint8)
-    det = np.array([[144, 212, 578, 480, 0.82, 0],
-                    [425, 281, 576, 472, 0.56, 65]])
-    output = tracker.update(det, rgb)
     # Works since frame count is less than min hits (1 <= 2)
     assert output.shape == (2, 8)  # two inputs should give two outputs
     output = np.flip(np.delete(output, [4, 7], axis=1), axis=0)

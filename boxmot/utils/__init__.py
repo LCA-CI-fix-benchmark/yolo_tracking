@@ -30,16 +30,8 @@ class PerClassDecorator:
             im = modified_args[1]
 
             # input one class of detections at a time in order to not mix them up
-            if instance.per_class is True and dets.size != 0:
-                dets_dict = {
-                    class_id: np.array([det for det in dets if det[5] == class_id])
-                    for class_id in set(det[5] for det in dets)
-                }
-                # get unique classes in predictions
-                detected_classes = set(dets_dict.keys())
-                # get unque classes with active trackers
-                active_classes = set([tracker.cls for tracker in instance.trackers])
-                # get tracks that are both active and in the current detections
+        per_class=False,
+        asso_func="centroid"
                 relevant_classes = active_classes.union(detected_classes)
 
                 mc_dets = np.empty(shape=(0, 8))

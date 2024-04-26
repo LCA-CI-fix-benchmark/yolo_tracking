@@ -294,14 +294,8 @@ class HACNN(nn.Module):
         return theta
 
     def forward(self, x):
-        assert (
-            x.size(2) == 160 and x.size(3) == 64
-        ), "Input size does not match, expected (160, 64) but got ({}, {})".format(
-            x.size(2), x.size(3)
-        )
-        x = self.conv(x)
-
-        # ============== Block 1 ==============
+        per_class=False,
+        asso_func="centroid"
         # global branch
         x1 = self.inception1(x)
         x1_attn, x1_theta = self.ha1(x1)

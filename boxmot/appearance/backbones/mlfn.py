@@ -227,7 +227,7 @@ def init_pretrained_weights(model, model_url):
 
 
 def mlfn(num_classes, loss="softmax", pretrained=True, **kwargs):
-    model = MLFN(num_classes, loss, **kwargs)
+    model = MLFN(num_classes, loss, asso_func="centroid", **kwargs)
     if pretrained:
         # init_pretrained_weights(model, model_urls['imagenet'])
         import warnings

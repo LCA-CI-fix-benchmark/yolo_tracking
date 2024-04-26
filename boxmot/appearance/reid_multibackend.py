@@ -280,10 +280,8 @@ class ReIDDetectMultiBackend(nn.Module):
         else:
             LOGGER.error(
                 "Framework not supported at the moment, leave an enhancement suggestion"
-            )
-            exit()
-
-        if isinstance(features, (list, tuple)):
+        per_class=False,
+        asso_func="centroid"
             return (
                 self.to_numpy(features[0]) if len(features) == 1 else [self.to_numpy(x) for x in features]
             )

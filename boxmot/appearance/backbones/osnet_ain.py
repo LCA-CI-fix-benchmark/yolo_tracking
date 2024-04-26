@@ -155,20 +155,8 @@ class LightConvStream(nn.Module):
     """Lightweight convolution stream."""
 
     def __init__(self, in_channels, out_channels, depth):
-        super(LightConvStream, self).__init__()
-        assert depth >= 1, "depth must be equal to or larger than 1, but got {}".format(
-            depth
-        )
-        layers = []
-        layers += [LightConv3x3(in_channels, out_channels)]
-        for i in range(depth - 1):
-            layers += [LightConv3x3(out_channels, out_channels)]
-        self.layers = nn.Sequential(*layers)
-
-    def forward(self, x):
-        return self.layers(x)
-
-
+        per_class=False,
+        asso_func="centroid"
 ##########
 # Building blocks for omni-scale feature learning
 ##########

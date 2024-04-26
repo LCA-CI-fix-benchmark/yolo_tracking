@@ -1450,9 +1450,11 @@ def batch_filter(x, P, zs, Fs, Qs, Hs, Rs, Bs=None, us=None,
     update_first : bool, optional
         controls whether the order of operations is update followed by
         predict, or predict followed by update. Default is predict->update.
-        saver : filterpy.common.Saver, optional
-            filterpy.common.Saver object. If provided, saver.save() will be
-            called after every epoch
+    saver : filterpy.common.Saver, optional
+        filterpy.common.Saver object. If provided, saver.save() will be
+        called after every epoch
+    asso_func : str, optional
+        association function to use in the tracker; default is "centroid"
     Returns
     -------
     means : np.array((n,dim_x,1))

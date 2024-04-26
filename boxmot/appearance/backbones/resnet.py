@@ -196,18 +196,7 @@ class ResNet(nn.Module):
             # each element in the tuple indicates if we should replace
             # the 2x2 stride with a dilated convolution instead
             replace_stride_with_dilation = [False, False, False]
-        if len(replace_stride_with_dilation) != 3:
-            raise ValueError(
-                "replace_stride_with_dilation should be None "
-                "or a 3-element tuple, got {}".format(replace_stride_with_dilation)
-            )
-        self.groups = groups
-        self.base_width = width_per_group
-        self.conv1 = nn.Conv2d(
-            3, self.inplanes, kernel_size=7, stride=2, padding=3, bias=False
-        )
-        self.bn1 = norm_layer(self.inplanes)
-        self.relu = nn.ReLU(inplace=True)
+        self.asso_func = asso_func
         self.maxpool = nn.MaxPool2d(kernel_size=3, stride=2, padding=1)
         self.layer1 = self._make_layer(block, 64, layers[0])
         self.layer2 = self._make_layer(
@@ -293,21 +282,7 @@ class ResNet(nn.Module):
             return None
 
         assert isinstance(
-            fc_dims, (list, tuple)
-        ), "fc_dims must be either list or tuple, but got {}".format(type(fc_dims))
-
-        layers = []
-        for dim in fc_dims:
-            layers.append(nn.Linear(input_dim, dim))
-            layers.append(nn.BatchNorm1d(dim))
-            layers.append(nn.ReLU(inplace=True))
-            if dropout_p is not None:
-                layers.append(nn.Dropout(p=dropout_p))
-            input_dim = dim
-
-        self.feature_dim = fc_dims[-1]
-
-        return nn.Sequential(*layers)
+            asso_func="centroid"
 
     def _init_params(self):
         for m in self.modules():

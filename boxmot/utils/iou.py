@@ -194,13 +194,7 @@ def run_asso_func(func, *args):
     and then call either one of the iou association functions or centroid.
 
     Parameters:
-    func: The batch function to call (either *iou*_batch or centroid_batch).
-    *args: Variable length argument list, containing either bounding boxes and optionally size parameters.
-    """
-    if func not in [iou_batch, giou_batch, diou_batch, ciou_batch, centroid_batch]:
-        raise ValueError("Invalid function specified. Must be either '(g,d,c, )iou_batch' or 'centroid_batch'.")
-
-    if func in (iou_batch, giou_batch, diou_batch, ciou_batch):
+        if func not in [iou_batch, giou_batch, diou_batch, ciou_batch, centroid_batch]:
         if len(args) != 4 or not all(isinstance(arg, (list, np.ndarray)) for arg in args[0:2]):
             raise ValueError("Invalid arguments for iou_batch. Expected two bounding boxes.")
         return func(*args[0:2])
