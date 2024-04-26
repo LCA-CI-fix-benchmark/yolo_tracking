@@ -1,7 +1,6 @@
 # Mikel Broström 🔥 Yolo Tracking 🧾 AGPL-3.0 license
 
 from collections import deque
-
 import numpy as np
 
 from boxmot.appearance.reid_multibackend import ReIDDetectMultiBackend

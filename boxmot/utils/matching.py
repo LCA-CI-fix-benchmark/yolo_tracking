@@ -1,12 +1,10 @@
 # Mikel Broström 🔥 Yolo Tracking 🧾 AGPL-3.0 license
-
 import lap
 import numpy as np
 import scipy
 import torch
 from scipy.spatial.distance import cdist
 from boxmot.utils.iou import iou_batch
-
 """
 Table for the 0.95 quantile of the chi-square distribution with N degrees of
 freedom (contains values for N=1, ..., 9). Taken from MATLAB/Octave's chi2inv
@@ -331,15 +329,14 @@ class NearestNeighborDistanceMetric(object):
     """
 
     def __init__(self, metric, matching_threshold, budget=None):
-        if metric == "euclidean":
-            self._metric = _nn_euclidean_distance
-        elif metric == "cosine":
-            self._metric = _nn_cosine_distance
-        else:
-            raise ValueError("Invalid metric; must be either 'euclidean' or 'cosine'")
-        self.matching_threshold = matching_threshold
-        self.budget = budget
-        self.samples = {}
+def __init__(self, metric, matching_threshold, budget=None):
+    if metric == "euclidean":
+        self._metric = _nn_euclidean_distance
+    elif metric == "cosine":
+        self._metric = _nn_cosine_distance
+    else:
+        raise ValueError("Invalid metric; must be either 'euclidean' or 'cosine'")
+    self.matching_threshold = matching_threshold
 
     def partial_fit(self, features, targets, active_targets):
         """Update the distance metric with new data.

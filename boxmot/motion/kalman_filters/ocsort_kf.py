@@ -287,7 +287,6 @@ class KalmanFilter(object):
             raise ValueError('dim_z must be 1 or greater')
         if dim_u < 0:
             raise ValueError('dim_u must be 0 or greater')
-
         self.dim_x = dim_x
         self.dim_z = dim_z
         self.dim_u = dim_u
@@ -1113,13 +1112,13 @@ class KalmanFilter(object):
         value for those matrices.
         Testing `z` (the measurement) is problamatic. x is a vector, and can be
         implemented as either a 1D array or as a nx1 column vector. Thus Hx
+        implemented as either a 1D array or as a nx1 column vector. Thus Hx
         can be of different shapes. Then, if Hx is a single value, it can
         be either a 1D array or 2D vector. If either is true, z can reasonably
         be a scalar (either '3' or np.array('3') are scalars under this
         definition), a 1D, 1 element array, or a 2D, 1 element array. You are
         allowed to pass in any combination that works.
         """
-
         if H is None:
             H = self.H
         if R is None:
@@ -1206,17 +1205,20 @@ class KalmanFilter(object):
 
 
 def update(x, P, z, R, H=None, return_all=False):
+def update(x, P, z, R, H=None, return_all=False):
     """
     Add a new measurement (z) to the Kalman filter. If z is None, nothing
     is changed.
-    This can handle either the multidimensional or unidimensional case. If
-    all parameters are floats instead of arrays the filter will still work,
-    and return floats for x, P as the result.
+    This method can handle both multidimensional and unidimensional cases. If
+    all parameters are floats instead of arrays, the filter will still work,
+    returning floats for x and P as the result.
+
+    Example usage:
     update(1, 2, 1, 1, 1)  # univariate
-    update(x, P, 1
+    update(x, P, z, R, H)
+
     Parameters
     ----------
-    x : numpy.array(dim_x, 1), or float
         State estimate vector
     P : numpy.array(dim_x, dim_x), or float
         Covariance matrix
