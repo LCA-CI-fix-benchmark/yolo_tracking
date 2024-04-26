@@ -40,14 +40,16 @@ class BaseTrack(object):
         return BaseTrack._count
 
     def activate(self, *args):
-        raise NotImplementedError
+        # Implement activation logic here
+        pass
 
     def predict(self):
-        raise NotImplementedError
+        # Implement prediction logic here
+        pass
 
     def update(self, *args, **kwargs):
-        raise NotImplementedError
-
+        # Implement update logic here
+        pass
     def mark_lost(self):
         self.state = TrackState.Lost
 

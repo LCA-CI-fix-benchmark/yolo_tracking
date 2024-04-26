@@ -6,7 +6,13 @@ import scipy
 import torch
 from scipy.spatial.distance import cdist
 from boxmot.utils.iou import iou_batch
+import re
 
+def match_string_with_pattern(input_string, pattern):
+    if re.match(pattern, input_string):
+        return True
+    else:
+        return False
 """
 Table for the 0.95 quantile of the chi-square distribution with N degrees of
 freedom (contains values for N=1, ..., 9). Taken from MATLAB/Octave's chi2inv
@@ -320,12 +326,6 @@ class NearestNeighborDistanceMetric(object):
     matching_threshold: float
         The matching threshold. Samples with larger distance are considered an
         invalid match.
-    budget : Optional[int]
-        If not None, fix samples per class to at most this number. Removes
-        the oldest samples when the budget is reached.
-    Attributes
-    ----------
-    samples : Dict[int -> List[ndarray]]
         A dictionary that maps from target identities to the list of samples
         that have been observed so far.
     """
@@ -335,11 +335,22 @@ class NearestNeighborDistanceMetric(object):
             self._metric = _nn_euclidean_distance
         elif metric == "cosine":
             self._metric = _nn_cosine_distance
-        else:
-            raise ValueError("Invalid metric; must be either 'euclidean' or 'cosine'")
+
+    def __init__(self, metric, matching_threshold, budget=None):
+    def __init__(self, metric, matching_threshold, budget=None):
         self.matching_threshold = matching_threshold
         self.budget = budget
         self.samples = {}
+
+    def partial_fit(self, features, targets, active_targets):
+        """Update the distance metric with new data.
+        Parameters
+        ----------
+        features : ndarray
+        targets : list
+        active_targets : list
+        """
+        # Add implementation for updating the distance metric with new data
 
     def partial_fit(self, features, targets, active_targets):
         """Update the distance metric with new data.
