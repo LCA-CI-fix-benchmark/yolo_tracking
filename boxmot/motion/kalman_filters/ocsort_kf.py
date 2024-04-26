@@ -292,7 +292,7 @@ class KalmanFilter(object):
         self.dim_z = dim_z
         self.dim_u = dim_u
 
-        self.x = zeros((dim_x, 1))        # state
+        self.x = np.zeros((dim_x, 1))        # state
         self.P = eye(dim_x)               # uncertainty covariance
         self.Q = eye(dim_x)               # process uncertainty
         self.B = None                     # control transition matrix
@@ -1121,6 +1121,7 @@ class KalmanFilter(object):
         """
 
         if H is None:
+            # Add error handling or appropriate action here
             H = self.H
         if R is None:
             R = self.R

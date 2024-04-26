@@ -302,6 +302,8 @@ class ResNet(nn.Module):
             layers.append(nn.BatchNorm1d(dim))
             layers.append(nn.ReLU(inplace=True))
             if dropout_p is not None:
+                if not isinstance(dropout_p, float) or dropout_p < 0 or dropout_p > 1:
+                    raise ValueError("dropout_p must be a float between 0 and 1.")
                 layers.append(nn.Dropout(p=dropout_p))
             input_dim = dim
 

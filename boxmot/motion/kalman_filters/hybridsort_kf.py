@@ -292,7 +292,7 @@ class KalmanFilter(object):
         self.dim_z = dim_z
         self.dim_u = dim_u
 
-        self.x = zeros((dim_x, 1))        # state
+        self.x = np.zeros((dim_x, 1))        # state
         self.P = eye(dim_x)               # uncertainty covariance
         self.Q = eye(dim_x)               # process uncertainty
         self.B = None                     # control transition matrix
@@ -1123,6 +1123,7 @@ class KalmanFilter(object):
         """
 
         if H is None:
+            # Add error handling or appropriate action here
             H = self.H
         if R is None:
             R = self.R
@@ -1310,7 +1311,6 @@ def update_steadystate(x, z, K, H=None):
     z : (dim_z, 1): array_like
         measurement for this update. z can be a scalar if dim_z is 1,
         otherwise it must be convertible to a column vector.
-    K : numpy.array, or float
         Kalman gain matrix
     H : numpy.array(dim_x, dim_x), or float, optional
         Measurement function. If not provided, a value of 1 is assumed.
@@ -1324,6 +1324,8 @@ def update_steadystate(x, z, K, H=None):
     all parameters are floats instead of arrays the filter will still work,
     and return floats for x, P as the result.
     >>> update_steadystate(1, 2, 1)  # univariate
+    >>> update_steadystate(x, P, z, H)
+    # Add error handling or default value assignment for H if not provided
     >>> update_steadystate(x, P, z, H)
     """
 

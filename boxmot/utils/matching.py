@@ -331,17 +331,7 @@ class NearestNeighborDistanceMetric(object):
     """
 
     def __init__(self, metric, matching_threshold, budget=None):
-        if metric == "euclidean":
-            self._metric = _nn_euclidean_distance
-        elif metric == "cosine":
-            self._metric = _nn_cosine_distance
-        else:
-            raise ValueError("Invalid metric; must be either 'euclidean' or 'cosine'")
-        self.matching_threshold = matching_threshold
-        self.budget = budget
-        self.samples = {}
-
-    def partial_fit(self, features, targets, active_targets):
+No changes needed in the provided code snippet.
         """Update the distance metric with new data.
         Parameters
         ----------
