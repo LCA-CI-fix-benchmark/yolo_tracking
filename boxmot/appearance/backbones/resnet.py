@@ -292,9 +292,8 @@ class ResNet(nn.Module):
             self.feature_dim = input_dim
             return None
 
-        assert isinstance(
-            fc_dims, (list, tuple)
-        ), "fc_dims must be either list or tuple, but got {}".format(type(fc_dims))
+        if not isinstance(fc_dims, (list, tuple)):
+            raise ValueError("fc_dims must be either list or tuple, but got {}".format(type(fc_dims)))
 
         layers = []
         for dim in fc_dims:
@@ -306,7 +305,6 @@ class ResNet(nn.Module):
             input_dim = dim
 
         self.feature_dim = fc_dims[-1]
-
         return nn.Sequential(*layers)
 
     def _init_params(self):
