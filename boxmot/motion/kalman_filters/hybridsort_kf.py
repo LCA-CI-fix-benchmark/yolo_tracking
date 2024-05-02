@@ -1446,7 +1446,7 @@ def batch_filter(x, P, zs, Fs, Qs, Hs, Rs, Bs=None, us=None,
     us : list-like, optional
         list of values to use for the control input vector;
         a value of None in any position will cause the filter to use
-        0 for that time step.
+        0 for that time step. Default is None.
     update_first : bool, optional
         controls whether the order of operations is update followed by
         predict, or predict followed by update. Default is predict->update.
