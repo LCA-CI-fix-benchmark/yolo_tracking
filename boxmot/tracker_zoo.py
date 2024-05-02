@@ -6,8 +6,13 @@ import yaml
 
 from boxmot.utils import BOXMOT
 
-
 def get_tracker_config(tracker_type):
+    if tracker_type == "kcf":
+        return {"param1": value1, "param2": value2}  # Example configuration for the KCF tracker
+    elif tracker_type == "csrt":
+        return {"param1": value1, "param2": value2}  # Example configuration for the CSRT tracker
+    else:
+        raise ValueError("Invalid tracker type. Supported tracker types: kcf, csrt")
     tracking_config = \
         BOXMOT /\
         'configs' /\

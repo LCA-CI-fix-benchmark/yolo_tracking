@@ -13,6 +13,14 @@ from boxmot.utils.checks import TestRequirements
 from examples.detectors import get_yolo_inferer
 
 __tr = TestRequirements()
+
+# Example: Initializing a tracker
+tracker = create_tracker(TRACKERS.KCF)
+tracker.initialize()
+
+# Example: Running a detector
+inferer = get_yolo_inferer(WEIGHTS.YOLO)
+detections = inferer.detect_objects(image)
 __tr.check_packages(('ultralytics @ git+https://github.com/mikel-brostrom/ultralytics.git', ))  # install
 
 from ultralytics import YOLO

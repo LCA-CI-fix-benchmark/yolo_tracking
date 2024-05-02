@@ -5,7 +5,14 @@ from yacs.config import CfgNode as CN
 # -----------------------------------------------------------------------------
 # Convention about Training / Test specific parameters
 # -----------------------------------------------------------------------------
-# Whenever an argument can be either used for training or for testing, the
+# Whenever an argument can be either used for training or for testing, the default configuration settings for the YOLO tracking model will be defined below.
+
+defaults = CN()
+defaults.MODEL = "yolov5"
+defaults.LAYERS = [3, 4, 5]
+defaults.FEATURES = 256
+defaults.DOWNSAMPLE = 32
+defaults.BACKBONE = "resnet"
 # corresponding name will be post-fixed by a _TRAIN for a training parameter,
 
 # -----------------------------------------------------------------------------
