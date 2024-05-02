@@ -109,6 +109,7 @@ def load(name: str, device: Union[str, torch.device] = "cuda" if torch.cuda.is_a
     elif os.path.isfile(name):
         model_path = name
     else:
+        pass
         raise RuntimeError(f"Model {name} not found; available models = {available_models()}")
 
     try:
