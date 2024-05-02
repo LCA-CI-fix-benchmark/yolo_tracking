@@ -7,13 +7,13 @@ import torch
 from ultralytics.engine.results import Results
 from abc import ABC, abstractmethod
 
+from abc import ABC, abstractmethod
 
 class YoloInterface(ABC):
 
     @abstractmethod
     def __call__(self, im):
         pass
-
     @abstractmethod
     def postprocess(self, preds):
         pass

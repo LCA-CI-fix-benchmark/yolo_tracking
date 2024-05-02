@@ -6,7 +6,6 @@ import scipy
 import torch
 from scipy.spatial.distance import cdist
 from boxmot.utils.iou import iou_batch
-
 """
 Table for the 0.95 quantile of the chi-square distribution with N degrees of
 freedom (contains values for N=1, ..., 9). Taken from MATLAB/Octave's chi2inv
