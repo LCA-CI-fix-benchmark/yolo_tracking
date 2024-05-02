@@ -20,14 +20,13 @@ class YoloInterface(ABC):
 
     def get_scaling_factors(self, im, im0):
 
-        # im to im0 factor for predictions
+        # Calculate scaling factors for image dimensions
         im0_w = im0.shape[1]
         im0_h = im0.shape[0]
         im_w = im.shape[2]
         im_h = im.shape[1]
         w_r = im0_w / im_w
         h_r = im0_h / im_h
-
         return im_w, im_h, w_r, h_r
 
     def scale_and_clip(self, preds, im_w, im_h, w_r, h_r):

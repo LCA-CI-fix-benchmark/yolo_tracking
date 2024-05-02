@@ -64,12 +64,13 @@ class Evaluator:
         except git.exc.GitError as err:
             LOGGER.info(f'Eval repo already downloaded {err}')
 
-        # fix deprecated np.float, np.int & np.bool
+        # Fix deprecated np.float, np.int & np.bool with error handling
         cmd_float = f"grep -rl np.float {val_tools_path} | xargs sed -i 's/np.float/float/g'"
-        subprocess.run(cmd_float, shell=True)
+        subprocess.run(cmd_float, shell=True, check=True)
         cmd_int = f"grep -rl np.int {val_tools_path} | xargs sed -i 's/np.int/int/g'"
-        subprocess.run(cmd_int, shell=True)
+        subprocess.run(cmd_int, shell=True, check=True)
         cmd_bool = f"grep -rl np.bool {val_tools_path} | xargs sed -i 's/np.bool/bool/g'"
+        subprocess.run(cmd_bool, shell=True, check=True)
         subprocess.run(cmd_bool, shell=True)
 
     def download_mot_dataset(self, val_tools_path, benchmark):
@@ -319,11 +320,10 @@ class Evaluator:
         # extract main metric results: HOTA, MOTA, IDF1
         combined_results = self.parse_mot_results(results)
 
-        # log them with tensorboard
         writer = SummaryWriter(save_dir)
-        writer.add_scalar('HOTA', combined_results['HOTA'])
-        writer.add_scalar('MOTA', combined_results['MOTA'])
-        writer.add_scalar('IDF1', combined_results['IDF1'])
+        writer.add_scalar('HOTA', combined_results['HOTA'], global_step=iteration)
+        writer.add_scalar('MOTA', combined_results['MOTA'], global_step=iteration)
+        writer.add_scalar('IDF1', combined_results['IDF1'], global_step=iteration)
 
         return combined_results
 
