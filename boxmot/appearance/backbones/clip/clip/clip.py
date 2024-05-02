@@ -171,7 +171,6 @@ def load(name: str, device: Union[str, torch.device] = "cuda" if torch.cuda.is_a
                     for i in [1, 2]:  # dtype can be the second or third argument to aten::to()
                         if inputs[i].node()["value"] == 5:
                             inputs[i].node().copyAttributes(float_node)
-
         model.apply(patch_float)
         patch_float(model.encode_image)
         patch_float(model.encode_text)

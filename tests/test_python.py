@@ -47,7 +47,6 @@ def test_ocsort_instantiation():
 def test_bytetrack_instantiation():
     BYTETracker()
 
-
 def test_deepocsort_output():
     tracker_conf = get_tracker_config('deepocsort')
     tracker = create_tracker(

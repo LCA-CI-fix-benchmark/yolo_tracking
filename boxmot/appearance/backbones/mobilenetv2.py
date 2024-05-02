@@ -214,21 +214,9 @@ def init_pretrained_weights(model, model_url):
     model.load_state_dict(model_dict)
 
 
-def mobilenetv2_x1_0(num_classes, loss, pretrained=True, **kwargs):
     model = MobileNetV2(
         num_classes, loss=loss, width_mult=1, fc_dims=None, dropout_p=None, **kwargs
     )
-    if pretrained:
-        # init_pretrained_weights(model, model_urls['mobilenetv2_x1_0'])
-        import warnings
-
-        warnings.warn(
-            "The imagenet pretrained weights need to be manually downloaded from {}".format(
-                model_urls["mobilenetv2_x1_0"]
-            )
-        )
-    return model
-
 
 def mobilenetv2_x1_4(num_classes, loss, pretrained=True, **kwargs):
     model = MobileNetV2(
