@@ -198,11 +198,13 @@ def run_asso_func(func, *args):
     *args: Variable length argument list, containing either bounding boxes and optionally size parameters.
     """
     if func not in [iou_batch, giou_batch, diou_batch, ciou_batch, centroid_batch]:
-        raise ValueError("Invalid function specified. Must be either '(g,d,c, )iou_batch' or 'centroid_batch'.")
+        raise ValueError(
+            "Invalid function specified. Must be one of: 'iou_batch', 'giou_batch', 'diou_batch', 'ciou_batch', 'centroid_batch'."
+        )
 
-    if func is (iou_batch or giou_batch or diou_batch or ciou_batch):
-        if len(args) != 4 or not all(isinstance(arg, (list, np.ndarray)) for arg in args[0:2]):
-            raise ValueError("Invalid arguments for iou_batch. Expected two bounding boxes.")
+    if func in [iou_batch, giou_batch, diou_batch, ciou_batch]:
+        if len(args) != 4 or not all(isinstance(arg, (np.ndarray)) for arg in args[:2]):
+            raise ValueError("Invalid arguments for iou_batch. Expected two numpy arrays of bounding boxes and width, height.")
         return func(*args)
     elif func is centroid_batch:
         if len(args) != 4 or not all(isinstance(arg, (list, np.ndarray)) for arg in args[:2]) or not all(isinstance(arg, (int)) for arg in args[2:]):
