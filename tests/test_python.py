@@ -57,7 +57,7 @@ def test_deepocsort_output():
         device='cpu',
         half=False,
         per_class=False,
-        asso_func="centroid"
+        asso_func="iou"
     )
     rgb = np.random.randint(255, size=(640, 640, 3), dtype=np.uint8)
     det = np.array([[144, 212, 578, 480, 0.82, 0],
@@ -75,7 +75,8 @@ def test_deepocsort_output():
         reid_weights=WEIGHTS / 'mobilenetv2_x1_4_dukemtmcreid.pt',
         device='cpu',
         half=False,
-        per_class=False
+        per_class=False,
+        asso_func="iou"
     )
     tracker.min_hits = 2
     output = tracker.update(np.empty((0, 6)), rgb)
