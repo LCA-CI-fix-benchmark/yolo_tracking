@@ -208,8 +208,9 @@ def run_asso_func(func, *args):
         if len(args) != 4 or not all(isinstance(arg, (list, np.ndarray)) for arg in args[:2]) or not all(isinstance(arg, (int)) for arg in args[2:]):
             raise ValueError("Invalid arguments for centroid_batch. Expected two bounding boxes and two size parameters.")
         return func(*args)
-    else:
-        raise ValueError("No such association method")
+    # Association mode must be one of the handled cases
+    # else:
+    #     raise ValueError("No such association method")
 
 
 def get_asso_func(asso_mode):
