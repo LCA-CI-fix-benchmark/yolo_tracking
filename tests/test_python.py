@@ -49,7 +49,7 @@ def test_bytetrack_instantiation():
 
 
 def test_deepocsort_output():
-    tracker_conf = get_tracker_config('deepocsort')
+    tracker_conf = get_tracker_config('deepocsort').copy()
     tracker = create_tracker(
         tracker_type='deepocsort',
         tracker_config=tracker_conf,
@@ -57,7 +57,7 @@ def test_deepocsort_output():
         device='cpu',
         half=False,
         per_class=False,
-        asso_func="centroid"
+        asso_func='centroid'
     )
     rgb = np.random.randint(255, size=(640, 640, 3), dtype=np.uint8)
     det = np.array([[144, 212, 578, 480, 0.82, 0],
