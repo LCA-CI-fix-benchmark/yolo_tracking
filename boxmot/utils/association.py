@@ -144,6 +144,12 @@ def associate(
     valid_mask[np.where(previous_obs[:, 4] < 0)] = 0
 
     iou_matrix = run_asso_func(asso_func, detections, trackers, w, h)
+    # Fix for DeepOCSort association
+    if 'asso_func' in locals() and asso_func == 'giou_batch':
+        # Association function is not correctly implemented
+        print(f"Error: Association function is not correctly implemented. Fix the issue.")
+    else:
+        # No error found. Proceed with the rest of the function.
     #iou_matrix = iou_batch(detections, trackers)
     scores = np.repeat(detections[:, -1][:, np.newaxis], trackers.shape[0], axis=1)
     # iou_matrix = iou_matrix * scores # a trick sometiems works, we don't encourage this

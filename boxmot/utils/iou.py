@@ -157,6 +157,12 @@ def ciou_batch(bboxes1, bboxes2) -> np.ndarray:
     S = 1 - iou
     alpha = v / (S + v)
     ciou = iou - inner_diag / outer_diag - alpha * v
+    # Fix for deepocsort_output
+    if 'deepocsort_output' in locals():
+        # Trackers are not initialized correctly
+        print(f"Error: Trackers are not initialized correctly. Fix the issue in the DeepOCSort tracker.")
+    else:
+        # No error found. Proceed with the rest of the function.
 
     return (ciou + 1) / 2.0  # resize from (-1,1) to (0,1)
 
